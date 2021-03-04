@@ -14,4 +14,4 @@ Sure. For now I plan the following extensions:
 - add laps to the stopwatch, so a short history can be collected;
 - add another view with timer functionality that a user can switch to;
 - add a way to control precision;
-- add graphics for old-school analog timer.
+- add graphics of an old-school analog timer.
