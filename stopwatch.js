@@ -41,15 +41,17 @@ function startWatch() {
 
     clock = setInterval(updateTime, 1000);
     display.setAttribute('data-state', 'active');
+    startButton.removeEventListener('click', startWatch);
 }
 
 function stopWatch() {
     clearInterval(clock);
     display.setAttribute('data-state', 'inactive');
+    startButton.addEventListener('click', startWatch);
 }
 
 function updateTime() {
-    const currentTime = Date.now()
+    const currentTime = Date.now();
     time += (currentTime - prevTime);
     prevTime = currentTime;
 
@@ -69,5 +71,5 @@ function parseTime(secondsTotal) {
     const minutes = ((secondsTotal - hours * 60 * 60) / 60).toFixed(0);
     const seconds = (secondsTotal % 60).toFixed(0);
     
-    return [hours, minutes, seconds]
+    return [hours, minutes, seconds];
 }
