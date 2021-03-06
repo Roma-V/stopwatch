@@ -67,8 +67,8 @@ function displayTime(hours, minutes, seconds) {
 }
 
 function parseTime(secondsTotal) {
-    const hours = (secondsTotal / 60 / 60).toFixed(0);
-    const minutes = ((secondsTotal - hours * 60 * 60) / 60).toFixed(0);
+    const hours = Math.floor(secondsTotal / 60 / 60);
+    const minutes = Math.floor((secondsTotal - hours * 60 * 60) / 60);
     const seconds = (secondsTotal % 60).toFixed(0);
     
     return [hours, minutes, seconds];
