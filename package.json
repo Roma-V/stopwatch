@@ -1,0 +1,35 @@
+{
+  "name": "stopwatch",
+  "version": "0.1.1",
+  "description": "online stopwatch",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Roma-V/stopwatch.git"
+  },
+  "keywords": [
+    "stopwatch",
+    "timer"
+  ],
+  "author": "Roman Vasilyev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Roma-V/stopwatch/issues"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-csslint": "^1.0.1",
+    "gulp-htmltidy": "^0.2.4",
+    "gulp-jshint": "^2.1.0",
+    "jshint": "^2.12.0"
+  },
+  "browserslist": [
+    "last 4 versions"
+  ]
+}
