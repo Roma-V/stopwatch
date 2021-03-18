@@ -2,12 +2,13 @@
 A simple web app which runs timers or stopwatches.
 
 ## Why I created it?
-This page is the result of my frustration with timer apps available desktop stopwatch apps. Even though there are other pages with similar capabilities, I decided to create my own and adjust it to my needs.
+This page is the result of my frustration with available desktop stopwatch apps. Even though there are other pages with similar capabilities they too have their own flaws, thus I decided to create my own and adjust it to my needs.
 
 ## What's the tech?
 - HTML: this is a simple page, though I tried to follow semantic rules as much as possible.
 - CSS: initial resetting is followed by BEM structure for the displayed components.
 - JS: a single script holds DOM references and several functions are used for clock manipulation by subscription to click event of the buttons.
+- Deployment: Gulp is used to run checks and transform files for deployment; everything is output into build directory which is not added to repository; actual deployment is performed with GitHub actions.
 
 ## Anything to add?
 Sure. For now I plan the following extensions:
