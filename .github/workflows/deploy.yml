@@ -17,22 +17,23 @@ jobs:
         run: gulp
       - run: |
           mkdir ~/web_drivers
-          chmod +w ~/web_drivers
-          wget -P ~/web_drivers/ http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
+          cd ~/web_drivers
+          wget http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
       # - name: download-web-driver-chrome
       #   uses: wei/wget@v1
       #   with:
       #     args: -P ~/web_drivers/ http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
-      - name: unpack-web-driver-chrome
-        working-directory: ~/web_drivers
-        run: unzip chromedriver_linux64.zip
-      - name: download-web-driver-firefox
-        uses: wei/wget@v1
-        with:
-          args: -P ~/web_drivers/ https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-linux64.tar.gz
-      - name: unpack-web-driver-firefox
-        working-directory: ~/web_drivers
-        run: tar -xzf geckodriver-v0.29.0-linux64.tar.gz
+      # - name: unpack-web-driver-chrome
+      #   working-directory: ~/web_drivers
+      #   run: unzip chromedriver_linux64.zip
+      # - name: download-web-driver-firefox
+      #   uses: wei/wget@v1
+      #   with:
+      #     args: -P ~/web_drivers/ https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-linux64.tar.gz
+      # - name: unpack-web-driver-firefox
+      #   working-directory: ~/web_drivers
+      #   run: tar -xzf geckodriver-v0.29.0-linux64.tar.gz
       - name: set-path-to-web_drivers
         working-directory: ~/
         run: echo "export PATH=$PATH:~/web_drivers" >> .bash_profile
