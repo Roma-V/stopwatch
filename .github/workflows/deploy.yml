@@ -18,10 +18,11 @@ jobs:
       - run: |
           mkdir ~/web_drivers
           chmod +w ~/web_drivers
-      - name: download-web-driver-chrome
-        uses: wei/wget@v1
-        with:
-          args: -P ~/web_drivers/ http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
+          wget -P ~/web_drivers/ http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
+      # - name: download-web-driver-chrome
+      #   uses: wei/wget@v1
+      #   with:
+      #     args: -P ~/web_drivers/ http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
       - name: unpack-web-driver-chrome
         working-directory: ~/web_drivers
         run: unzip chromedriver_linux64.zip
