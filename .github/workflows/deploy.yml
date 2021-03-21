@@ -15,6 +15,7 @@ jobs:
         run: npm ci
       - name: gulp
         run: gulp
+      - run: mkdir ~/web_drivers
       - name: download-web-driver-chrome
         uses: wei/wget@v1
         with:
