@@ -6,6 +6,9 @@ html, body {
     font-family: "Open Sans", sans-serif;
     font-size: 10px;
 }
+body {
+    text-align: center;
+}
 
 /* Custom styles */
 .class * {
@@ -21,15 +24,12 @@ html, body {
     margin: 1em auto;
     padding: 1em;
     min-width: 200px;
-    width: -moz-fit-content;
-    width: fit-content;
+    display: inline-block;
 }
 
 .clock__display,
 .clock__controls {
     margin: 0 auto;
-    width: -moz-fit-content;
-    width: fit-content;
     font-size: 4rem;
     text-align: center;
 }
@@ -67,4 +67,8 @@ html, body {
 
 .clock__controls--button:active {
     transform: translateY(2px);;
+}
+
+#clock__display__wrapper--milliseconds {
+    display: none;
 }

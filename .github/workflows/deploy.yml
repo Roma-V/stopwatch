@@ -15,6 +15,35 @@ jobs:
         run: npm ci
       - name: gulp
         run: gulp
+      - name: download-web-driver-chrome
+        uses: wei/wget@v1
+        with:
+          args: -O ~/web_drivers http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
+      - name: unpack-web-driver-chrome
+        working-directory: ~/web_drivers
+        run: unzip chromedriver_linux64.zip
+      - name: download-web-driver-firefox
+        uses: wei/wget@v1
+        with:
+          args: -O ~/web_drivers https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-linux64.tar.gz
+      - name: unpack-web-driver-firefox
+        working-directory: ~/web_drivers
+        run: tar -xzf geckodriver-v0.29.0-linux64.tar.gz
+      - name: set-path-to-web_drivers
+        working-directory: ~/
+        run: echo "export PATH=$PATH:~/web_drivers" >> .bash_profile
+      - name: e2e-tests
+        run: |
+          gulp server&
+          node stopwatch.test.js
+      - uses: actions/cache@v2
+        id: npm-build-webdrivers-cache
+        with:
+          path: |
+            build
+        key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
 
   deploy:
     needs: test-and-build
@@ -23,13 +52,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/cache@v2
+        id: npm-build-webdrivers-cache
         with:
-          node-version: '14.x'
-      - name: install npm
-        run: npm ci
-      - name: gulp
-        run: gulp
+          path: |
+            build
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:

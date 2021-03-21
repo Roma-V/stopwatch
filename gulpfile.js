@@ -5,7 +5,16 @@ const htmltidy = require('gulp-htmltidy');
 const autoprefixer = require('gulp-autoprefixer');
 const csslint = require('gulp-csslint');
 const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
 const jshint = require('gulp-jshint');
+
+const connect = require('gulp-connect');
+
+gulp.task('server', function() {
+    connect.server({
+        root: 'build',
+      });
+});
 
 function html(cb) {
     return gulp.src('src/index.html')
@@ -30,18 +39,25 @@ function css(cb) {
     cb();
 }
 
-function js(cb) {
+function jsCheck(cb) {
     return gulp.src('src/stopwatch.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
+    cb();
+}
+
+function jsBuild(cb) {
+    return gulp.src('src/stopwatch.js')
         .pipe(babel({
-            presets: ['@babel/env']
+            presets: ['@babel/preset-env'],
         }))
+        .pipe(uglify())
         .pipe(gulp.dest('build'));
     cb();
 }
 
 exports.html = html;
 exports.css = css;
-exports.js = js;
-exports.default = series(html, css, js);;
+exports.jsCheck = jsCheck;
+exports.jsBuild = jsBuild;
+exports.default = series(html, css, jsCheck, jsBuild);;
