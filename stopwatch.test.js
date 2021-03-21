@@ -19,6 +19,7 @@ const logInGreenBack = text => console.log(chalk.whiteBright.bgGreen(text));
  */
 stopwatchTestIn('firefox')
     .then(() => stopwatchTestIn('chrome'))
+    .catch(error => console.log(error));
 
 /**
  * The test body
