@@ -3,7 +3,9 @@ const chalk = require('chalk');
 
 const webdriver = require('selenium-webdriver'),
     By = webdriver.By;
-
+const firefox = require('selenium-webdriver/firefox');
+const chrome = require('selenium-webdriver/chrome');
+ 
 /**
  * Custom logging
  */
@@ -26,9 +28,22 @@ stopwatchTestIn('firefox')
  * @param {string} browser - string defining which browser to run
  */
 async function stopwatchTestIn(browser) {
-    const driver = new webdriver.Builder()
-        .forBrowser(browser)
-        .build();
+    let options, driver;
+    if (browser === 'firefox') {
+        options = new firefox.Options().headless();
+        driver = new webdriver.Builder()
+            .forBrowser('firefox')
+            .setFirefoxOptions(options)
+            .build();
+    } 
+    else if (browser === 'chrome') {
+        options = new chrome.Options().headless();
+        driver = new webdriver.Builder()
+            .forBrowser('chrome')
+            .setChromeOptions(options)
+            .build();
+    } 
+    else return;
 
     try {
         logInGreenBack(`Running tests in ${browser}`);
