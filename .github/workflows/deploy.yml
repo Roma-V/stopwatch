@@ -20,6 +20,8 @@ jobs:
           cd ~/web_drivers
           wget http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
+          cd
+          echo "export PATH=$PATH:~/web_drivers" >> .bash_profile
       # - name: download-web-driver-chrome
       #   uses: wei/wget@v1
       #   with:
@@ -34,9 +36,9 @@ jobs:
       # - name: unpack-web-driver-firefox
       #   working-directory: ~/web_drivers
       #   run: tar -xzf geckodriver-v0.29.0-linux64.tar.gz
-      - name: set-path-to-web_drivers
-        working-directory: ~/
-        run: echo "export PATH=$PATH:~/web_drivers" >> .bash_profile
+      # - name: set-path-to-web_drivers
+      #   working-directory: ~/
+      #   run: echo "export PATH=$PATH:~/web_drivers" >> .bash_profile
       - name: e2e-tests
         run: |
           gulp server&
