@@ -42,8 +42,8 @@ jobs:
           path: |
             build
         key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
+        restore-keys: |
+          ${{ runner.os }}-build-
 
   deploy:
     needs: test-and-build
