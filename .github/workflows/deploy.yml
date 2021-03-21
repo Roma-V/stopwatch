@@ -18,15 +18,17 @@ jobs:
       - run: mkdir ~/web_drivers
       - name: download-web-driver-chrome
         uses: wei/wget@v1
+        working-directory: ~/web_drivers
         with:
-          args: -P ~/web_drivers/ http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
+          args: http://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
       - name: unpack-web-driver-chrome
         working-directory: ~/web_drivers
         run: unzip chromedriver_linux64.zip
       - name: download-web-driver-firefox
         uses: wei/wget@v1
+        working-directory: ~/web_drivers
         with:
-          args: -P ~/web_drivers/ https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-linux64.tar.gz
+          args: https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-linux64.tar.gz
       - name: unpack-web-driver-firefox
         working-directory: ~/web_drivers
         run: tar -xzf geckodriver-v0.29.0-linux64.tar.gz
