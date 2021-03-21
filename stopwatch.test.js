@@ -11,15 +11,15 @@ const PADDING = '    ';
 
 const logWithTab = text => console.log(PADDING, text);
 const logInGreen = text => console.log(chalk.green(text));
+const logInRed = text => console.log(chalk.red(text));
 const logInGreenBack = text => console.log(chalk.whiteBright.bgGreen(text));
-// const logInRed = text => console.log(chalk.red(text));
 
 /**
  * Run the tests
  */
 stopwatchTestIn('firefox')
     .then(() => stopwatchTestIn('chrome'))
-    .catch(error => console.log(error));
+    .catch(logInRed);
 
 /**
  * The test body
@@ -81,7 +81,7 @@ async function stopwatchTestIn(browser) {
         logWithTab(`Seconds display shows ${secondsDisplayText} seconds`);
         assert.strictEqual(secondsDisplayText, '00');
     } catch(error) {
-        console.log(error);
+        logInRed(error);
     } finally {
         // Close the browser
         await driver.quit();
