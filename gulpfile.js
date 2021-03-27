@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const { series } = require('gulp');
+const { series, parallel } = require('gulp');
 
 const htmltidy = require('gulp-htmltidy');
 const autoprefixer = require('gulp-autoprefixer');
@@ -10,20 +10,20 @@ const jshint = require('gulp-jshint');
 
 const connect = require('gulp-connect');
 
-gulp.task('server', function() {
-    connect.server({
-        root: 'build',
-      });
-});
+const firefoxDriver = require('./tests/firefox-webdriver.js');
+const chromeDriver = require('./tests/chrome-webdriver.js');
+const stopwatchTestIn = require('./tests/stopwatch.test.js');
 
-function html(cb) {
+/**
+ * Linting and building
+ */
+function html() {
     return gulp.src('src/index.html')
         .pipe(htmltidy())
         .pipe(gulp.dest('build'));
-    cb();
 }
 
-function css(cb) {
+function css() {
     return gulp.src('src/styles.css')
         .pipe(csslint({
             'order-alphabetical': false,
@@ -36,25 +36,56 @@ function css(cb) {
             cascade: false
         }))
         .pipe(gulp.dest('build'));
-    cb();
 }
 
-function jsCheck(cb) {
+function jsCheck() {
     return gulp.src('src/stopwatch.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
-    cb();
 }
 
-function jsBuild(cb) {
+function jsBuild() {
     return gulp.src('src/stopwatch.js')
         .pipe(babel({
             presets: ['@babel/preset-env'],
         }))
         .pipe(uglify())
         .pipe(gulp.dest('build'));
-    cb();
 }
+
+/**
+ * Local server tasks
+ */
+gulp.task('server:open', async function() {
+    return connect.server({
+        root: 'build',
+      });
+});
+
+gulp.task('server:close', async function() {
+    connect.serverClose();
+});
+
+/**
+ * Test tasks
+ */
+function testIn(browserDriver) {
+    return () => {
+            return stopwatchTestIn(browserDriver)
+                .finally(() => browserDriver.quit());
+        }
+}
+
+
+gulp.task('test:firefox', testIn(firefoxDriver));
+gulp.task('test:chrome', testIn(chromeDriver));
+
+gulp.task('test:e2e', 
+    parallel(
+        'server:open', 
+        series('test:firefox', 'test:chrome', 'server:close')
+        )
+    );
 
 exports.html = html;
 exports.css = css;
