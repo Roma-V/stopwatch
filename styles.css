@@ -6,10 +6,12 @@ html, body {
     font-family: "Open Sans", sans-serif;
     font-size: 10px;
 }
+body {
+    text-align: center;
+}
 
 /* Custom styles */
 .class * {
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -18,22 +20,16 @@ html, body {
 .clock {
     border: 1px solid RoyalBlue;
     border-radius: 1em;
-    -webkit-box-shadow: inset 0 0 0.75em RoyalBlue;
     box-shadow: inset 0 0 0.75em RoyalBlue;
     margin: 1em auto;
     padding: 1em;
     min-width: 200px;
-    width: -moz-fit-content;
-    width: -webkit-fit-content;
-    width: fit-content;
+    display: inline-block;
 }
 
 .clock__display,
 .clock__controls {
     margin: 0 auto;
-    width: -moz-fit-content;
-    width: -webkit-fit-content;
-    width: fit-content;
     font-size: 4rem;
     text-align: center;
 }
@@ -66,12 +62,13 @@ html, body {
 .clock__controls--button:hover,
 .clock__controls--button:focus {
     background: #cf3e1a;
-    -webkit-box-shadow: 0 0 5px silver;
     box-shadow: 0 0 5px silver;
 }
 
 .clock__controls--button:active {
-    -webkit-transform: translateY(2px);
-    -ms-transform: translateY(2px);
     transform: translateY(2px);;
+}
+
+#clock__display__wrapper--milliseconds {
+    display: none;
 }
