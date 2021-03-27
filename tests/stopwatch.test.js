@@ -55,7 +55,7 @@ async function stopwatchTestIn(driver) {
     logWithTab(`Start Button text is ${stopButtonText}`);
 
     const resetpButtonText = await resetpButton.getText();
-    assert.strictEqual(resetpButtonText, 'pReset');
+    assert.strictEqual(resetpButtonText, 'Reset');
     logWithTab(`Start Button text is ${resetpButtonText}`);
 
     // 5 Seconds wait
