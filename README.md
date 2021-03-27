@@ -8,7 +8,7 @@ This page is the result of my frustration with available desktop stopwatch apps.
 - HTML: this is a simple page, though I tried to follow semantic rules as much as possible.
 - CSS: initial resetting is followed by BEM structure for the displayed components.
 - JS: a single script holds DOM references and several functions are used for clock manipulation by subscription to click event of the buttons. A simple polyfill is used for String.padStart for IE browsers.
-- Testing: simple linting tasks for HTML, CSS and JS are run with Gulp. E2E tests with Selenium check initial rendering as well as buttons functionality in a start-5_second_wait-stop-reset cycle.
+- Testing: simple linting tasks for HTML, CSS and JS are run with Gulp. E2E tests with Selenium check initial rendering as well as buttons functionality in a start-5_second_wait-stop-reset cycle. Local server with gulp-connect is run against firefox and chrome webdrivers.
 - Deployment: Gulp is used to run checks and transform files for deployment; everything is output into build directory which is not added to repository; actual deployment is performed with GitHub actions.
 
 ## Anything to add?
